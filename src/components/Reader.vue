@@ -50,6 +50,10 @@ export default class Reader extends Vue {
   playing = false
 
   playLoop(): void {
+    if (this.wordIndex > this.words.length) {
+      this.playing = false
+      this.wordIndex = 0
+    }
     if (this.playing) {
       this.wordIndex++
       setTimeout(this.playLoop, 1000/(this.speed/60))
