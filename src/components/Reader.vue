@@ -50,7 +50,7 @@ export default class Reader extends Vue {
   playing = false
 
   playLoop(): void {
-    if (this.wordIndex > this.words.length) {
+    if (this.wordIndex >= this.words.length) {
       this.playing = false
       this.wordIndex = 0
     }
