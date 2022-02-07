@@ -7,9 +7,7 @@
                 :class="{ 'switch-toggle-checked': theme === 'dark' }"
             ></div>
         </label>
-        <label for="checkbox" class="darkmode-label">
-            <p id="darkmode-text">Dark Mode</p>
-        </label>
+        <label for="checkbox" class="darkmode-label"></label>
     </div>
 </template>
 
