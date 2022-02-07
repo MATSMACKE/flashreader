@@ -4,7 +4,7 @@
       <h1 id="word">
         {{word}}
       </h1>
-      <input type="range" min="1" :max="words.length" v-model="wordIndex" id="word-slider">
+      <input type="range" min="1" :max="words.length" v-model="wordIndex" id="word-slider" class="slider">
       <p v-if="!playing">Word {{wordIndex}} of {{words.length}}</p>
       <p id="speed">
         {{speed}} WPM
@@ -133,12 +133,11 @@ export default class Reader extends Vue {
 #reader-main {
   margin: 0;
 }
+
 h3 {
   margin: 40px 0 0;
 }
-a {
-  color: #42b983;
-}
+
 #textentry {
   height: 100%;
   display: flex;
@@ -146,6 +145,7 @@ a {
   align-items: center;
   justify-content: center;
 }
+
 #word-area {
   display: flex;
   flex-direction: column;
@@ -153,15 +153,18 @@ a {
   align-items: center;
   justify-content: center;
 }
+
 #word {
   margin-top: 10%;
   margin-bottom: 50px;
   font-size: 2.5rem;
 }
+
 #word-slider {
   margin-top: 10px;
   width: 50%;
 }
+
 textarea {
   width: 75%;
   height: 75%;
@@ -170,9 +173,15 @@ textarea {
   border-radius: 5px;
   border-style: solid;
   border-width: 1px;
-  background-color: var(--background-color-primary);
+  background: var(--background-color-primary);
   color: var(--text-primary-color);
+  transition: background-color var(--transition-time), color var(--transition-time);
 }
+
+textarea:focus {
+  outline: none;
+}
+
 button {
   padding: 20px;
   padding-top: 10px;
@@ -182,6 +191,42 @@ button {
   margin: 10px;
   cursor: pointer;
 }
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--accent-color);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  transition: background-color var(--transition-time);
+}
 
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--slider-color);
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color var(--transition-time);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--slider-color);
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  transition: background-color var(--transition-time);
+}
 
 </style>

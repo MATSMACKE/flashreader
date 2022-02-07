@@ -4,7 +4,7 @@
         <label for="checkbox" class="switch-label">
             <div
                 class="switch-toggle"
-                :class="{ 'switch-toggle-checked': theme === 'dark-theme' }"
+                :class="{ 'switch-toggle-checked': theme === 'dark' }"
             ></div>
         </label>
         <label for="checkbox" class="darkmode-label">
@@ -14,42 +14,43 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue } from 'vue-class-component';
 
 export default class App extends Vue {
-    theme = 'light-theme'
+    theme = 'light'
 
-    mounted() {
-        const initUserTheme = this.getMediaPreference();
+    mounted(): void {
+        const initUserTheme = this.getPreferred();
         this.setTheme(initUserTheme);
     }
 
-    toggleTheme() {
-        const activeTheme = localStorage.getItem("user-theme");
-        if (activeTheme === "light-theme") {
-            this.setTheme("dark-theme");
-        } 
+    toggleTheme(): void {
+        const activeTheme = localStorage.getItem("theme");
+        this.setTheme(activeTheme === "light" ? "light" : "dark")
+        if (activeTheme === "light") {
+            this.setTheme("dark");
+        }
         else {
-            this.setTheme("light-theme");
+            this.setTheme("light");
         }
         
     }
 
-    setTheme(theme: string) {
-        localStorage.setItem("user-theme", theme);
+    setTheme(theme: string): void {
+        localStorage.setItem("theme", theme);
         this.theme = theme;
         document.documentElement.className = theme;
     }
 
-    getMediaPreference() {
+    getPreferred(): string {
         const hasDarkPreference = window.matchMedia(
             "(prefers-color-scheme: dark)"
         ).matches;
         if (hasDarkPreference) {
-            return "dark-theme";
+            return "dark";
         } 
         else {
-            return "light-theme";
+            return "light";
         }
     }
 }
@@ -72,7 +73,7 @@ export default class App extends Vue {
     height: calc(var(--element-size) * 0.35);
     position: relative;
     padding: calc(var(--element-size) * 0.1);
-    transition: background 0.5s ease;
+    transition: background var(--transition-time) ease;
     justify-content: space-between;
     width: var(--element-size);
     z-index: 1;
@@ -88,7 +89,7 @@ export default class App extends Vue {
     height: calc(var(--element-size) * 0.4);
     width: calc(var(--element-size) * 0.4);
     transform: translateX(0);
-    transition: transform 0.3s ease, background-color 0.5s ease;
+    transition: transform 0.3s ease, background-color var(--transition-time) ease;
 }
 
 .switch-toggle-checked {
@@ -101,7 +102,7 @@ export default class App extends Vue {
     height: calc(var(--element-size) * 0.35);
     position: absolute;
     padding: calc(var(--element-size) * 0.1);
-    transition: background 0.5s ease;
+    transition: background var(--transition-time) ease;
     justify-content: space-between;
     left: 20px;
     width: 150px;
