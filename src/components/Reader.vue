@@ -25,12 +25,12 @@ import { Options, Vue } from 'vue-class-component';
 
 @Options({
   props: {
-    msg: String
   }
 })
 export default class Reader extends Vue {
   wordsEntered = false
   enteredtext = `Paste text here to read it quickly`
+
   read(): void {
     this.words = []
     let tempWords = this.enteredtext.split(/[\s\n]/)
@@ -130,6 +130,9 @@ export default class Reader extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#reader-main {
+  margin: 0;
+}
 h3 {
   margin: 40px 0 0;
 }
@@ -142,9 +145,6 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-#reader-main {
-  margin: 0;
 }
 #word-area {
   display: flex;
@@ -169,17 +169,19 @@ textarea {
   padding: 5px;
   border-radius: 5px;
   border-style: solid;
-  border-color: black;
   border-width: 1px;
+  background-color: var(--background-color-primary);
+  color: var(--text-primary-color);
 }
 button {
   padding: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: white;
-  border: solid 1px black;
+  border: solid 1px;
   border-radius: 10px;
   margin: 10px;
   cursor: pointer;
 }
+
+
 </style>
